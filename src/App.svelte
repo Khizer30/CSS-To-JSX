@@ -5,6 +5,7 @@
   // Variables
   let css: string = "" ;
   let jsx: string = "" ;
+  let error: string = "" ;
   let words: string[] = [] ;
   let selected: string[] = [] ;
 
@@ -85,7 +86,14 @@
   function copy(): void
   {
     navigator.clipboard.writeText(jsx) ;
-    alert("JSX Copied!") ;
+    error = "JSX Copied!" ;
+
+    // Reset
+    css = "" ;
+    jsx = "" ;
+    setTimeout(() => { error = "" }, 1750) ;
+    words = [] ;
+    selected = [] ;
   }
 </script>
 
@@ -99,7 +107,11 @@
   <form method="post" target="_self" class="width80"
   enctype="application/x-www-form-urlencoded" autocomplete="off" novalidate>
 
+  { #if error }
+    <p class="error"> { error } </p>
+  { :else }
     <p class="error"> <br /> </p>
+  { /if }
 
     <input
       name="css"
